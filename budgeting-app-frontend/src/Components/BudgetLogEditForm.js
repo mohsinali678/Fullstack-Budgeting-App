@@ -10,7 +10,8 @@ export class BudgetLogEditForm extends Component {
         this.state = {
             transaction :{
                 transactionDate: "",
-                transactionDetail: "",
+                transactionName: "",
+                transactionFrom:"",
                 transactionAmount: 0
             }
         }
@@ -29,7 +30,6 @@ export class BudgetLogEditForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {updateBudgetLog} = this.props;
-        console.log(this.state.transaction, this.props.match.params)
         updateBudgetLog(this.state.transaction, this.props.match.params.index);
         this.props.history.push("/transactions");
     }
