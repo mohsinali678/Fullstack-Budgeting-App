@@ -8,6 +8,7 @@ import './App.css';
 //PAGES
 import Home from "./Pages/Home";
 import Index from './Pages/Index';
+import New from './Pages/New';
 
 
 //COMPONENTS
@@ -42,6 +43,21 @@ export class App extends Component {
       .catch(c => console.warn(`Warning: ${c}`));
   };
   
+
+    //Create a New Budget Log
+    addBudgetLog = (newBudgetLog) => {
+      const {transactions} = this.state;
+      axios.post(`${this.API_BASE}/transactions`, newBudgetLog)
+        .then(response => {
+          this.setState({
+            transactions:[...transactions, newBudgetLog]
+          })
+        },
+        error => console.error(`Error: ${error}`)
+        )
+        .catch(c => console.warn(`Warning: ${c}`))
+    };
+
   render() {
     const {transactions} = this.state;
     return (
@@ -57,6 +73,10 @@ export class App extends Component {
 
               <Route exact path="/transactions">
                 <Index transactions={transactions}/>
+              </Route>
+
+              <Route path="/transactions/new">
+                <New addBudgetLog={this.addBudgetLog}/>
               </Route>
             </Switch>
           </main>
