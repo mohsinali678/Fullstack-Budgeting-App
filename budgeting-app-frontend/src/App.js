@@ -11,9 +11,10 @@ import Index from './Pages/Index';
 import New from './Pages/New';
 
 
+
 //COMPONENTS
 import NavBar from './Components/NavBar';
-
+import FootBar from './Components/FootBar';
 
 export class App extends Component {
   constructor(){
@@ -80,6 +81,7 @@ export class App extends Component {
               </Route>
             </Switch>
           </main>
+          <FootBar />
         </Router>
       </div>
     )

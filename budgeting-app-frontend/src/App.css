@@ -90,3 +90,19 @@ input[type="submit"] {
   text-align: center;
   color: #02007C;
 }
+
+footer {
+  background: #02007C;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 2px 2px 4px grey;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 10px;
+}
+
+footer > h1 {
+  color:white
+}
