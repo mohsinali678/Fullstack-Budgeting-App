@@ -11,6 +11,7 @@ import Index from './Pages/Index';
 import New from './Pages/New';
 import Show from './Pages/Show';
 import Edit from "./Pages/Edit";
+import FourOFour from './Pages/FourOFour';
 
 
 
@@ -123,6 +124,10 @@ export class App extends Component {
 
               <Route path="/transactions/:index/edit">
                 <Edit updateBudgetLog={this.updateBudgetLog}/>
+              </Route>
+
+              <Route path="*">
+                <FourOFour />
               </Route>
             </Switch>
           </main>
