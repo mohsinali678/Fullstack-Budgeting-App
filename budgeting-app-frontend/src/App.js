@@ -2,10 +2,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { apiURL } from "./util/apiURL";
-
+import axios from "axios";
 
 //PAGES
 import Home from "./Pages/Home";
+import Index from './Pages/Index';
 
 
 //COMPONENTS
@@ -41,6 +42,7 @@ export class App extends Component {
   };
   
   render() {
+    const {transactions} = this.state;
     return (
       <div className="App">
         <Router>
