@@ -86,6 +86,12 @@ input[type="submit"] {
   width: 30%;
 }
 
+.showNavigation {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
 .Home{
   text-align: center;
   color: #02007C;

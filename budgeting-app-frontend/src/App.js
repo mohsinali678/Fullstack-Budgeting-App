@@ -9,6 +9,7 @@ import './App.css';
 import Home from "./Pages/Home";
 import Index from './Pages/Index';
 import New from './Pages/New';
+import Show from './Pages/Show';
 
 
 
@@ -59,6 +60,23 @@ export class App extends Component {
         .catch(c => console.warn(`Warning: ${c}`))
     };
 
+
+  //Delete a Budget Log
+  deleteBudgetLog = (index) => {
+    const {transactions} = this.state;
+    axios.delete(`${this.API_BASE}/transactions/${index}`)
+      .then(response => {
+        const tempArray = [...transactions];
+        tempArray.splice(index, 1);        
+        this.setState({
+          transactions:[...tempArray]
+        })
+      },
+      error => console.error(`Error: ${error}`)
+      )
+      .catch(c => console.warn(`Warning: ${c}`));
+  };
+
   render() {
     const {transactions} = this.state;
     return (
@@ -78,6 +96,10 @@ export class App extends Component {
 
               <Route path="/transactions/new">
                 <New addBudgetLog={this.addBudgetLog}/>
+              </Route>
+
+              <Route exact path="/transactions/:index">
+                <Show transactions={transactions} deleteBudgetLog={this.deleteBudgetLog}/>
               </Route>
             </Switch>
           </main>
