@@ -10,6 +10,7 @@ import Home from "./Pages/Home";
 import Index from './Pages/Index';
 import New from './Pages/New';
 import Show from './Pages/Show';
+import Edit from "./Pages/Edit";
 
 
 
@@ -77,6 +78,24 @@ export class App extends Component {
       .catch(c => console.warn(`Warning: ${c}`));
   };
 
+
+  //Update a Budget Log
+  updateBudgetLog = (updatedBudgetLog, index) => {
+    const {transactions} = this.state;
+    axios.put(`${this.API_BASE}/transactions/${index}`, updatedBudgetLog)
+      .then(response => {
+        const tempArray = [...transactions];
+        tempArray[index] = updatedBudgetLog;
+
+        this.setState({
+          transactions:[...tempArray]
+        })
+      },
+      error => console.error(`Error: ${error}`)
+      )
+      .catch(c => console.warn(`Warning: ${c}`));
+  };
+
   render() {
     const {transactions} = this.state;
     return (
@@ -100,6 +119,10 @@ export class App extends Component {
 
               <Route exact path="/transactions/:index">
                 <Show transactions={transactions} deleteBudgetLog={this.deleteBudgetLog}/>
+              </Route>
+
+              <Route path="/transactions/:index/edit">
+                <Edit updateBudgetLog={this.updateBudgetLog}/>
               </Route>
             </Switch>
           </main>
