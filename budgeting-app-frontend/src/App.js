@@ -13,6 +13,33 @@ import NavBar from './Components/NavBar';
 
 
 export class App extends Component {
+  constructor(){
+    super();
+    
+    this.state = {
+      transactions:[]
+    }
+
+    this.API_BASE = apiURL();
+  }
+  
+  //Load Budget Logs on Page Load
+  componentDidMount(){
+    
+    axios.get(`${this.API_BASE}/transactions`)
+      .then(response => {
+        const { data } = response;
+
+        this.setState({
+          transactions:[...data]
+        })
+
+      },
+      error => console.error(`Error: ${error}`)
+      )
+      .catch(c => console.warn(`Warning: ${c}`));
+  };
+  
   render() {
     return (
       <div className="App">
@@ -23,6 +50,10 @@ export class App extends Component {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+
+              <Route exact path="/transactions">
+                <Index transactions={transactions}/>
               </Route>
             </Switch>
           </main>
