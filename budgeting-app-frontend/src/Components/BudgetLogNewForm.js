@@ -27,6 +27,11 @@ export class BudgetLogNewForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {addBudgetLog} = this.props;
+        
+        // This will immediately redirect a user to the /transactions route without waiting for the 
+        // api call or setState call to complete.
+        // That's ok, but it might mean a user has to wait a couple hundred milliseconds until their new transaction pops up on the index view.
+        // What are some alternative solutions?
         addBudgetLog(this.state.transaction);
         this.props.history.push("/transactions");
     }
