@@ -38,7 +38,7 @@ export class App extends Component {
         const { data } = response;
 
         this.setState({
-          transactions:[...data]
+          transactions:[...data] // It's not necessary to create a shallow copy of data here. You can simply set key:val pair transactions: data.
         })
 
       },
@@ -53,6 +53,8 @@ export class App extends Component {
       const {transactions} = this.state;
       axios.post(`${this.API_BASE}/transactions`, newBudgetLog)
         .then(response => {
+        // This approach works alright, but it means you are managing front-end state and back-end state separately.
+        // This can become a pain and a source of bugs in larger applications.
           this.setState({
             transactions:[...transactions, newBudgetLog]
           })
